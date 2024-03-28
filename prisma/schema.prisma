@@ -13,9 +13,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model VoteSession {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  sessionId String @unique
-  places    Json
-  answers   Json
+model VoteGroup {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  groupCode   String       @unique
+  places      String[]
+  activeUsers VotingUser[]
+  Vote        Vote[]
+
+  @@map("voteGroup")
+}
+
+type VotingUser {
+  userId String?
+  name   String
+}
+
+// id
+// group code: short code for users to join
+// # active users
+// the places being voted on
+// # of submissions -- but also submission information like:
+// -- user submitting, for what place, true/false
+
+model Vote {
+  id      String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String?   @db.ObjectId
+  placeId String
+  rank    Int
+  groupId String    @db.ObjectId
+  group   VoteGroup @relation(fields: [groupId], references: [id])
+  user    User?     @relation(fields: [userId], references: [id])
+
+  @@map("voteSubmissions")
+}
+
+model User {
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  name  String?
+  email String? @unique
+  Vote  Vote[]
+
+  @@map("users")
 }
