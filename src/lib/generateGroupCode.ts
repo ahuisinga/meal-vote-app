@@ -1,4 +1,4 @@
-import { decode, encode } from "./base62";
+import { decode, encode } from "./base36";
 
 export default function generateGroupCode(): string {
   const id = Date.now();

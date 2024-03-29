@@ -1,5 +1,4 @@
-const CHARS_SYMBOLS =
-  "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
+const CHARS_SYMBOLS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 export function encode(id: number): string {
   let hash = "";
@@ -13,8 +12,9 @@ export function encode(id: number): string {
   return hash;
 }
 
-// this does not work yet
 export function decode(code: string): string {
+  // convert input to uppercase
+  code = code.toUpperCase();
   let id = 0;
   for (let i = 0; i < code.length; i++) {
     id = CHARS_SYMBOLS.indexOf(code[i]) + CHARS_SYMBOLS.length * id;
