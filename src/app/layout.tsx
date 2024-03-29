@@ -17,10 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="dracula">
       <body className={inter.className}>
-        <main
-          className="flex min-h-screen flex-col items-center p-24"
-          data-theme="dracula"
-        >
+        <main className="p-24" data-theme="dracula">
           {children}
         </main>
       </body>
