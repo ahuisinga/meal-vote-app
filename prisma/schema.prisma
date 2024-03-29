@@ -15,7 +15,7 @@ datasource db {
 
 model VoteGroup {
   id          String       @id @default(auto()) @map("_id") @db.ObjectId
-  groupCode   String       @unique
+  groupCode   String?      @unique
   places      String[]
   activeUsers VotingUser[]
   Vote        Vote[]
