@@ -2,6 +2,7 @@
 
 import Rating from "@/components/Rating";
 import { useState } from "react";
+import { addUserToGroup } from "./actions";
 
 interface VotePageProps {
   params: {
@@ -10,6 +11,7 @@ interface VotePageProps {
 }
 
 interface Restaurant {
+  id: string;
   name: string;
   distance: number;
   types: string[];
@@ -18,12 +20,14 @@ interface Restaurant {
 
 const places: Restaurant[] = [
   {
+    id: "0",
     name: "Cabo Bob's",
     distance: 8,
     types: ["mexican", "quick"],
     rating: 4,
   },
   {
+    id: "1",
     name: "Blue Sushi",
     distance: 0.01,
     types: ["sushi", "asian"],
@@ -34,18 +38,41 @@ const places: Restaurant[] = [
 export default function VotePage({ params: { id } }: VotePageProps) {
   const [currentPlace, setCurrentPlace] = useState<number>(0);
   const [showResult, setShowResult] = useState<boolean>(false);
+  const [showPlaces, setShowPlaces] = useState<boolean>(false);
+  const [showStart, setShowStart] = useState<boolean>(true);
 
   const getNextPlace = () => {
     if (currentPlace < places.length - 1) {
       setCurrentPlace(currentPlace + 1);
     } else {
       setShowResult(true);
+      setShowPlaces(false);
     }
   };
 
   return (
-    <div>
-      {!showResult ? (
+    <div className="flex flex-col">
+      {showStart && (
+        <form
+          className="flex h-full w-full flex-col items-center justify-center md:flex-row"
+          action={async (formData: FormData) => {
+            await addUserToGroup(id, formData);
+            setShowStart(false);
+            setShowPlaces(true);
+          }}
+        >
+          <input
+            type="text"
+            name="username"
+            placeholder="Enter name"
+            className="input input-bordered"
+          />
+          <button className="btn btn-primary m-3" type="submit">
+            Start
+          </button>
+        </form>
+      )}
+      {showPlaces && (
         <div className="absolute inset-0 flex h-full w-full flex-col items-center justify-center">
           <div className="card bg-base-300 w-96 shadow-xl">
             <div className="card-body">
@@ -102,9 +129,8 @@ export default function VotePage({ params: { id } }: VotePageProps) {
             </div>
           </div>
         </div>
-      ) : (
-        <h1>Done!</h1>
       )}
+      {showResult && <p>Done!</p>}
     </div>
   );
 }
