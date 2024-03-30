@@ -3,6 +3,7 @@
 import Rating from "@/components/Rating";
 import { useState } from "react";
 import { addUserToGroup } from "./actions";
+import { prisma } from "@/lib/db/prisma";
 
 interface VotePageProps {
   params: {
@@ -35,11 +36,20 @@ const places: Restaurant[] = [
   },
 ];
 
+// const getGroup = async (id: string) => {
+//   await prisma.voteGroup.findUnique({
+//     where: { id },
+//   });
+// };
+
 export default function VotePage({ params: { id } }: VotePageProps) {
   const [currentPlace, setCurrentPlace] = useState<number>(0);
   const [showResult, setShowResult] = useState<boolean>(false);
   const [showPlaces, setShowPlaces] = useState<boolean>(false);
   const [showStart, setShowStart] = useState<boolean>(true);
+  const [user, setUser] = useState<string | null>(null);
+
+  // const group = await getGroup(id);
 
   const getNextPlace = () => {
     if (currentPlace < places.length - 1) {

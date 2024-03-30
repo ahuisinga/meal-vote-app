@@ -15,12 +15,11 @@ export default function CreateGroupButton({
       className={`btn btn-secondary`}
       onClick={() => {
         startTransition(async () => {
-          console.log("do something please");
           await createGroup();
         });
       }}
     >
-      Create Group
+      {isPending && <span className="loading loading-spinner" />}Create Group
     </button>
   );
 }

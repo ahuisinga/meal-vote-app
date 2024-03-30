@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 
 export async function createNewGroup() {
   "use server";
-  console.log("create new group");
   const group = await prisma.voteGroup.create({
     data: {
       groupCode: generateGroupCode(),
