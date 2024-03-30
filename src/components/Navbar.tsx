@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Navbar() {
   return (
     <div className="navbar bg-base-100">
@@ -26,14 +28,27 @@ export default function Navbar() {
             <a>Profile</a>
           </li>
           <li>
-            <a>Item 3</a>
+            <Link href={"/group/create"}>Create New Group</Link>
+          </li>
+          <li>
+            <Link href={"/group/join"}>Join a Group</Link>
           </li>
         </ul>
       </div>
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">EAT!</a>
+        <Link href={"/"} className="btn btn-ghost text-xl italic text-accent">
+          EAT!
+        </Link>
       </div>
       <div className="hidden flex-none gap-2 sm:flex">
+        <ul className="menu menu-horizontal px-1">
+          <li>
+            <Link href={"/group/create"}>Create New Group</Link>
+          </li>
+          <li>
+            <Link href={"/group/join"}>Join a Group</Link>
+          </li>
+        </ul>
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
