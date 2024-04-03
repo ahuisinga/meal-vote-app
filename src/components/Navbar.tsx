@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-200">
       <div className="dropdown">
         <div tabIndex={0} role="button" className="btn btn-ghost sm:hidden">
           <svg
@@ -64,13 +64,10 @@ export default function Navbar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+            className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-200 p-2 shadow"
           >
             <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
+              <a>Profile</a>
             </li>
             <li>
               <a>Settings</a>
