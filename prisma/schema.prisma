@@ -16,7 +16,7 @@ datasource db {
 model VoteGroup {
   id          String       @id @default(auto()) @map("_id") @db.ObjectId
   groupCode   String?      @unique
-  places      String[]
+  places      Place[]
   activeUsers VotingUser[]
   votes       Vote[]
 
@@ -36,13 +36,14 @@ type VotingUser {
 // -- user submitting, for what place, true/false
 
 model Vote {
-  id      String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId  String?   @db.ObjectId
-  place   Place
-  rank    Int
-  groupId String    @db.ObjectId
-  group   VoteGroup @relation(fields: [groupId], references: [id])
-  user    User?     @relation(fields: [userId], references: [id])
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String?   @db.ObjectId
+  username String
+  place    Place
+  rank     Int
+  groupId  String    @db.ObjectId
+  group    VoteGroup @relation(fields: [groupId], references: [id])
+  user     User?     @relation(fields: [userId], references: [id])
 
   @@map("voteSubmissions")
 }

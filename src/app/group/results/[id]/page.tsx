@@ -38,6 +38,10 @@ export default async function ResultsPage({
           </li>
         ))}
       </ol>
+      <h3 className="text-lg">
+        {group.numFinishedVotes} out of {group.activeUsers.length} people have
+        finished voting
+      </h3>
     </div>
   );
 }
