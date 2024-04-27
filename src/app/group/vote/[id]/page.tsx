@@ -34,6 +34,27 @@ const places: Restaurant[] = [
     types: ["sushi", "asian"],
     rating: 5,
   },
+  {
+    id: "2",
+    name: "Jinya",
+    distance: 0.01,
+    types: ["ramen", "asian"],
+    rating: 5,
+  },
+  {
+    id: "3",
+    name: "Jerry Mike's",
+    distance: 0.1,
+    types: ["sandwhiches"],
+    rating: 3,
+  },
+  {
+    id: "4",
+    name: "Culver's",
+    distance: 0.5,
+    types: ["sushi", "asian"],
+    rating: 3,
+  },
 ];
 
 export default function VotePage({ params: { id } }: VotePageProps) {
