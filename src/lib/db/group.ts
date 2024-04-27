@@ -1,4 +1,4 @@
-import { Prisma, Vote } from "@prisma/client";
+import { Prisma, Vote, VotingUser } from "@prisma/client";
 import { prisma } from "./prisma";
 
 export type GroupWithVotes = Prisma.VoteGroupGetPayload<{
@@ -72,4 +72,15 @@ export async function getGroup(groupId: string): Promise<GroupResults | null> {
     rankings: rankingList,
     numFinishedVotes,
   };
+}
+
+export async function getGroupUsers(
+  groupId: string,
+): Promise<VotingUser[] | null> {
+  const group = await prisma.voteGroup.findUnique({
+    where: {
+      id: groupId,
+    },
+  });
+  return group?.activeUsers ?? null;
 }
