@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { addUserToGroup } from "./actions";
 
 interface StartPageProps {
@@ -8,6 +9,7 @@ interface StartPageProps {
 
 export default function StartPage({ params: { id } }: StartPageProps) {
   const addUserToGroupWithId = addUserToGroup.bind(null, id);
+  const username = cookies().get("localUsername")?.value;
   return (
     <div className="flex flex-col">
       <form
@@ -19,6 +21,7 @@ export default function StartPage({ params: { id } }: StartPageProps) {
           name="username"
           placeholder="Enter name"
           className="input input-bordered"
+          defaultValue={username}
         />
         <button className="btn btn-primary m-3" type="submit">
           Start
