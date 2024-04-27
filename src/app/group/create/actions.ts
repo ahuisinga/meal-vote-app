@@ -11,5 +11,5 @@ export async function createNewGroup() {
       groupCode: generateGroupCode(),
     },
   });
-  redirect("/group/vote/" + group.id);
+  redirect("/group/start/" + group.id);
 }

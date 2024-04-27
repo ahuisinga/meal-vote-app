@@ -1,20 +1,40 @@
 "use server";
 
 import { prisma } from "@/lib/db/prisma";
+import { revalidatePath } from "next/cache";
 
-export async function addUserToGroup(groupId: string, formData: FormData) {
-  const username = formData.get("username")?.toString() || "user" + Date.now();
-  // add user to group
-  await prisma.voteGroup.update({
-    where: { id: groupId },
+async function createVoteSubmission(
+  placeId: string,
+  placeName: string,
+  groupId: string,
+  rank: number,
+  userId?: string,
+) {
+  await prisma.vote.create({
     data: {
-      activeUsers: {
-        push: [
-          {
-            name: username,
-          },
-        ],
-      },
+      place: { id: placeId, name: placeName },
+      groupId,
+      rank,
+      userId,
     },
   });
+  revalidatePath("/group/vote/" + groupId);
+}
+
+export async function voteYes(
+  placeId: string,
+  placeName: string,
+  groupId: string,
+  userId?: string,
+) {
+  await createVoteSubmission(placeId, placeName, groupId, 1, userId);
+}
+
+export async function voteNo(
+  placeId: string,
+  placeName: string,
+  groupId: string,
+  userId?: string,
+) {
+  await createVoteSubmission(placeId, placeName, groupId, 0, userId);
 }

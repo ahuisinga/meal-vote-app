@@ -18,7 +18,7 @@ model VoteGroup {
   groupCode   String?      @unique
   places      String[]
   activeUsers VotingUser[]
-  Vote        Vote[]
+  votes       Vote[]
 
   @@map("voteGroup")
 }
@@ -38,7 +38,7 @@ type VotingUser {
 model Vote {
   id      String    @id @default(auto()) @map("_id") @db.ObjectId
   userId  String?   @db.ObjectId
-  placeId String
+  place   Place
   rank    Int
   groupId String    @db.ObjectId
   group   VoteGroup @relation(fields: [groupId], references: [id])
@@ -47,11 +47,16 @@ model Vote {
   @@map("voteSubmissions")
 }
 
+type Place {
+  id   String
+  name String
+}
+
 model User {
   id    String  @id @default(auto()) @map("_id") @db.ObjectId
   name  String?
   email String? @unique
-  Vote  Vote[]
+  votes Vote[]
 
   @@map("users")
 }
