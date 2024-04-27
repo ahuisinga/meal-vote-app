@@ -17,7 +17,7 @@ export default async function ResultsPage({
   return (
     <div className="flex flex-col items-center">
       <h2 className="text-xl">Your dinner destination:</h2>
-      <h1 className="text-2xl">{results[0].name}</h1>
+      <h1 className="text-2xl">&#127881; {results[0].name} &#127881;</h1>
       <br />
       <h3 className="text-lg">Full Rankings</h3>
       <ol className="list-decimal">
