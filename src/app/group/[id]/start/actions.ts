@@ -32,5 +32,5 @@ export async function addUserToGroup(groupId: string, formData: FormData) {
     },
   });
   cookies().set("localUsername", username);
-  redirect("/group/vote/" + groupId);
+  redirect("/group/" + groupId + "/vote");
 }

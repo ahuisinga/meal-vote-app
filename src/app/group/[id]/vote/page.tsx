@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { voteNo, voteYes } from "./actions";
 import { restaurants } from "@/lib/mockPlaceData";
+import { prisma } from "@/lib/db/prisma";
+import { getGroupCode } from "@/lib/db/group";
 
 interface VotePageProps {
   params: {
@@ -29,7 +31,7 @@ export default function VotePage({ params: { id } }: VotePageProps) {
 
   return (
     <div className="flex flex-col">
-      <div className="absolute inset-0 flex h-full w-full flex-col items-center justify-center">
+      <div className="flex h-full w-full flex-col items-center justify-center">
         <div className="card w-96 bg-base-300 shadow-xl">
           <div className="card-body">
             <h2 className="card-title">

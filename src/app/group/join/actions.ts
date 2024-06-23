@@ -33,6 +33,6 @@ export async function joinGroup(prevState: any, formData: FormData) {
       },
     };
   } else {
-    redirect("/group/start/" + group.id);
+    redirect("/group/" + group.id + "/start");
   }
 }

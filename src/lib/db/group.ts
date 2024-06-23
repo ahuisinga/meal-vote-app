@@ -84,3 +84,12 @@ export async function getGroupUsers(
   });
   return group?.activeUsers ?? null;
 }
+
+export async function getGroupCode(groupId: string): Promise<string | null> {
+  const group = await prisma.voteGroup.findUnique({
+    where: {
+      id: groupId,
+    },
+  });
+  return group?.groupCode ?? null;
+}

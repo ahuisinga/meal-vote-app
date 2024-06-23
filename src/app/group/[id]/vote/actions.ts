@@ -24,7 +24,7 @@ async function createVoteSubmission(
       username,
     },
   });
-  revalidatePath("/group/vote/" + groupId);
+  revalidatePath("/group/" + groupId + "/vote");
 }
 
 export async function voteYes(

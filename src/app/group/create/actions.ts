@@ -18,5 +18,5 @@ export async function createNewGroup() {
       places,
     },
   });
-  redirect("/group/start/" + group.id);
+  redirect("/group/" + group.id + "/start");
 }
