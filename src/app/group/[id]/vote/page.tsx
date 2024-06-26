@@ -25,7 +25,7 @@ export default function VotePage({ params: { id } }: VotePageProps) {
     if (currentPlace < places.length - 1) {
       setCurrentPlace(currentPlace + 1);
     } else {
-      router.push("/group/results/" + id);
+      router.push("/group/" + id + "/results");
     }
   };
 
